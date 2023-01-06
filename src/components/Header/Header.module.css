@@ -1,0 +1,16 @@
+.header {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #7f2607;
+  align-items: center;
+}
+.header_title {
+  font-size: 36px;
+  font-family: "Inter", sans-serif;
+  margin-left: 150px;
+  color: white;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}

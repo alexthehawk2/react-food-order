@@ -1,0 +1,53 @@
+.item_container {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid grey;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Inter";
+  text-align: left;
+  margin-bottom: 20px;
+}
+.left_div {
+  display: flex;
+  flex-direction: column;
+}
+
+.right_div {
+  display: flex;
+  flex-direction: column;
+}
+
+.order_title {
+  margin-top: 0px;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+.order_description {
+  margin-top: 0px;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.order_price {
+  margin-top: 0px;
+  margin-bottom: 20px;
+  color: #9a6033;
+}
+
+.order_amount {
+  margin-right: 10px;
+  font-weight: 800;
+}
+.order_input {
+  width: 30px;
+  font-family: "Inter";
+}
+.right_sub_div {
+  margin: 0px auto;
+  margin-bottom: 20px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -1,0 +1,61 @@
+.modal_container {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: fixed; /* Stay in place */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Location of the box */
+  left: 0;
+  top: 0;
+  font-family: "Inter";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal_card {
+  width: 50%;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.cart_total_container {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.cart_total_container > h1 {
+  margin: 0px;
+}
+.cart_footer_btns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal_cancel_btn {
+  margin-right: 20px;
+  background-color: white;
+  color: #7f2607;
+  border: 1px solid #7f2607;
+  border-radius: 30px;
+  height: 30px;
+  width: 80px;
+}
+.modal_cancel_btn:hover {
+  background-color: #7f2607;
+  color: #fff;
+}
+.order_btn {
+  margin-right: 20px;
+  background-color: #7f2607;
+  color: white;
+  border: 1px solid #7f2607;
+  border-radius: 30px;
+  height: 30px;
+  width: 80px;
+}
+.modal_cancel_btn:hover {
+  background-color: #7f2607;
+  color: #fff;
+}

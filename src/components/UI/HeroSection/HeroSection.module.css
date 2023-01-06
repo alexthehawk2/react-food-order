@@ -1,0 +1,13 @@
+.hero_container {
+  height: 350px;
+  background: url("../../../images/meals.jpg") no-repeat;
+
+  background-size: cover;
+}
+.hero_separator {
+  content: "";
+  background: url("../../../images/hero-img-sec-separator.png") no-repeat;
+  background-size: cover;
+  height: 100%;
+  padding-bottom: 1px;
+}

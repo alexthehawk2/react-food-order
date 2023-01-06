@@ -1,0 +1,10 @@
+.order_card {
+  width: 75%;
+  height: auto;
+  margin: 0 auto;
+  background-color: #fffdff;
+  border-radius: 15px;
+  padding: 20px;
+  position: relative;
+  bottom: 130px;
+}
