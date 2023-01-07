@@ -4,7 +4,7 @@ import styles from "./App.module.css";
 import HeroSection from "./components/UI/HeroSection/HeroSection";
 import OrderSection from "./components/UI/OrderSection/OrderSection";
 import CartModal from "./components/UI/Modals/CartModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 const orderItems = [
   {
@@ -37,9 +37,21 @@ const cartItems = [
     cartItemPrice: 1.99,
   },
 ];
+
 function App() {
-  const [cart, setCart] = useState({ cartItems: [], cartTotal: 0 });
+  const [cart, setCart] = useState({ cartItems: [] });
+  const [cartTotal, setCartTotal] = useState(0);
   const [cartModal, setCartModal] = useState(false);
+  useEffect(() => {
+    setCartTotal((prevTotal) => {
+      console.log(cart);
+      let total = 0;
+      cart.cartItems.forEach(
+        (cartItem) => (total += cartItem.currentItemTotal)
+      );
+      return total;
+    });
+  }, [cart]);
   return (
     <div className={styles.App}>
       <CartModal
@@ -47,8 +59,13 @@ function App() {
         setCart={setCart}
         cartModal={cartModal}
         setCartModal={setCartModal}
+        cartTotal={cartTotal}
       />
-      <Header cartModal={cartModal} setCartModal={setCartModal} />
+      <Header
+        cartModal={cartModal}
+        setCartModal={setCartModal}
+        cartItemsCount={cart.cartItems.length}
+      />
       <HeroSection />
       <OrderSection orderItems={orderItems} setCart={setCart} cart={cart} />
     </div>

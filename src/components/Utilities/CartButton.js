@@ -6,7 +6,7 @@ const Button = (props) => {
       <div className={styles.cart_button}>
         <img src={cartIcon} alt="shopping-cart" />
         <span className={styles.cart_text}>Your Cart</span>
-        <span className={styles.cart_item_text}>0</span>
+        <span className={styles.cart_item_text}>{props.cartItemsCount}</span>
       </div>
     </div>
   );

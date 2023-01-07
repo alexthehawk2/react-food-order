@@ -4,31 +4,73 @@ import styles from "./CardElement.module.css";
 const CardElements = (props) => {
   const [amountInput, setAmountInput] = useState("");
   const amountChangeHandler = (event) => {
-    if (event.target.value === "0") {
+    if (parseInt(event.target.value) <= 0) {
       setAmountInput("");
       return;
     }
     setAmountInput(event.target.value);
   };
+
+  const isNewOrderItem = (orderId, cartItems) => {
+    let result = true;
+    cartItems.forEach((cartItem) => {
+      if (cartItem.id === orderId) {
+        result = false;
+      }
+    });
+    return result;
+  };
   const addHandler = () => {
+    setAmountInput("");
     if (props.cart.cartItems.length === 0) {
       const cartItemObj = {
         id: props.orderItemId,
         cartItemName: props.orderTitle,
-        cartItemQuantity: amountInput,
+        cartItemQuantity: parseInt(amountInput),
         cartItemPrice: props.orderPrice,
-        currentItemTotal: amountInput * props.orderPrice,
+        currentItemTotal: parseInt(amountInput) * props.orderPrice,
       };
-      props.setCart({
-        ...props.cart,
-        cartItems: [cartItemObj],
+      props.setCart((prevCart) => {
+        const updatedCart = {
+          ...prevCart,
+        };
+        updatedCart.cartItems.push(cartItemObj);
+        return updatedCart;
       });
-      //   const updatedCart = {
-      //     ...prevCart,
-      //     cartItems: [cartItemObj],
-      //   };
+    } else if (isNewOrderItem(props.orderItemId, props.cart.cartItems)) {
+      props.setCart((prevCart) => {
+        const cartItemObj = {
+          id: props.orderItemId,
+          cartItemName: props.orderTitle,
+          cartItemQuantity: parseInt(amountInput),
+          cartItemPrice: props.orderPrice,
+          currentItemTotal: parseInt(amountInput) * props.orderPrice,
+        };
+        const updatedCart = {
+          ...prevCart,
+        };
+
+        updatedCart.cartItems.push(cartItemObj);
+        return updatedCart;
+      });
+    } else if (!isNewOrderItem(props.orderItemId, props.cart.cartItems)) {
+      props.setCart((prevCart) => {
+        const updatedCart = { ...prevCart };
+        updatedCart.cartItems = prevCart.cartItems.map((cartItem) => {
+          return cartItem.id === props.orderItemId
+            ? {
+                ...cartItem,
+                cartItemQuantity:
+                  cartItem.cartItemQuantity + parseInt(amountInput),
+                currentItemTotal:
+                  (cartItem.cartItemQuantity + parseInt(amountInput)) *
+                  cartItem.cartItemPrice,
+              }
+            : cartItem;
+        });
+        return updatedCart;
+      });
     }
-    console.log(props.cart);
   };
   return (
     <div className={styles.item_container}>
@@ -43,6 +85,7 @@ const CardElements = (props) => {
         <div className={styles.right_sub_div}>
           <label className={styles.order_amount}>Amount</label>
           <input
+            placeholder="qty"
             min={1}
             value={amountInput}
             onChange={amountChangeHandler}

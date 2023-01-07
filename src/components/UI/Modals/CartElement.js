@@ -1,6 +1,34 @@
 import styles from "./CartElement.module.css";
 
 const CartElement = (props) => {
+  const toggleQuantityBtnHandler = (operator) => {
+    props.setCart((prevCart) => {
+      const updatedCart = {
+        ...prevCart,
+      };
+      updatedCart.cartItems = updatedCart.cartItems.map((cartItem) => {
+        if (cartItem.id === props.orderItemId) {
+          if (operator === "-" && cartItem.cartItemQuantity === 1) {
+            return null;
+          } else {
+            return {
+              ...cartItem,
+              cartItemQuantity:
+                operator === "+"
+                  ? cartItem.cartItemQuantity + 1
+                  : cartItem.cartItemQuantity - 1,
+              currentItemTotal:
+                operator === "+"
+                  ? (cartItem.cartItemQuantity + 1) * cartItem.cartItemPrice
+                  : (cartItem.cartItemQuantity - 1) * cartItem.cartItemPrice,
+            };
+          }
+        }
+        return cartItem;
+      });
+      return updatedCart;
+    });
+  };
   return (
     <div className={styles.cart_element_container}>
       <div className={styles.cart_element_left_div}>
@@ -13,8 +41,18 @@ const CartElement = (props) => {
         </div>
       </div>
       <div className={styles.cart_element_right_div}>
-        <button className={styles.cart_button}>-</button>
-        <button className={styles.cart_button}>+</button>
+        <button
+          onClick={(event) => toggleQuantityBtnHandler(event.target.innerHTML)}
+          className={styles.cart_button}
+        >
+          -
+        </button>
+        <button
+          onClick={(event) => toggleQuantityBtnHandler(event.target.innerHTML)}
+          className={styles.cart_button}
+        >
+          +
+        </button>
       </div>
     </div>
   );
